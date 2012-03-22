@@ -1,0 +1,21 @@
+slf is an php micro-framework heavily inspired by 
+CodeIgniter, and built with compatibility in mind.
+
+=== AUTHOR ===
+Ben Doran - contact@bdoran.co.uk
+(C) 2011-2012 - Ben Doran
+
+=== PROJECT GOALS ===
+
+Be light and easy to implement 
+Force use of proper MVC 
+Allow rapid prototyping 
+Aid in the development of RESTfull services 
+Be Highly Configurable 
+Be Highly Testable
+Be Faster than CodeIgniter (at the little things) but, be CodeIgniter compatible (for the big things)
+
+== LICENSE: MIT License ==
+slf is released under MIT License
+You should have received a copy of the MIT License along with this program.
+If not, see http://www.opensource.org/licenses/mit-license.php
