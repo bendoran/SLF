@@ -1,0 +1,46 @@
+== EXAMPLE 2 ==
+
+= MVC, Database & POST Example =
+
+Controller -> root.php has 2 functions, index and addstudent : 
+
+	index :		 Uses the student model to get the students, these 
+				 students are stored in an array and passed to the loaded
+				 view.
+			
+	addstudent : Adds a student that is sent to the controller by 
+				 the get_post() function get_post returns an object of 
+				 all $_POST paramaters sent to the controller. It uses the
+				 post variables to call add_student on the model. It then 
+				 renders the view, which (with the value submitted) either
+				 renders a form, or a link to return to the list page.
+				 
+Model -> student_model.php has 2 functions add_student & get_student.
+
+	get_student: Calls a simple SELECT Query on the internal $db object that is present
+				 in all models. This makes a subsequent query (using PDO) to get an
+				 array of Student objects.
+				 
+	add_student: Again, calls a simple query (this time INSERT) on the $db object, passing 
+				 through a set of bound parameters as an array.
+				 
+View -> home_view.php renders a list of students, expects an array of Student Objects to load.
+View -> form_view.php renders a form for adding a student, expects a single "$submitted" boolean 
+		value to determine whether a form or navigation should be rendered.
+
+
+
+= SQL to Create Student Table = 
+
+CREATE TABLE `students` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` tinytext,
+  `last_name` tinytext,
+  `gender` char(1) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `date_enrolled` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+
+

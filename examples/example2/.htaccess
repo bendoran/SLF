@@ -1,0 +1,6 @@
+RewriteEngine on
+#Rewrite base should be your virtual directory (e.g /test/ or /site/)
+RewriteBase /examples/example2/
+RewriteCond $1 !^(index\.php|images|js|css)
+RewriteRule ^(.*)$ index.php?/$1 [L]
+Options +FollowSymlinks

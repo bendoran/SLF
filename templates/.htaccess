@@ -1,0 +1,11 @@
+RewriteEngine on
+
+#Rewrite base should be your virtual directory in relation to the root domain e.g /test/ or /site/
+RewriteBase /
+
+#Add things you want excluded from URI rewriting
+RewriteCond $1 !^(index\.php|images|js|css)
+
+RewriteRule ^(.*)$ index.php?/$1 [L]
+
+Options +FollowSymlinks

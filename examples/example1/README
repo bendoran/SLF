@@ -1,0 +1,43 @@
+== EXAMPLE 1 ==
+
+Example shows how catnap controllers work, 
+each controller is represented by URI these are 
+mapped to controller functions. 
+
+URLS are inspected and a controller is loaded, if a controller 
+cannot be found in the root path a 404 page is shown.
+
+URIS are mapped by firstly folder, then class, then function, the
+"root.php" file represents the folder as a whole, and can be used 
+to catch the default URI for that folder.
+
+E.g: 
+
+http://website.com/ would execute the index.php of the root.php controller.
+http://website.com/login could be either root.php's index function, login.php's 
+index function or the root.php's (in a folder called login) index function, or finally
+if non of the above our found, the index function will be called with the string "login".
+
+The URI presendence is folders, then classes, then functions, then parameters..
+
+Classes & Functions :   
+
+http://<url>/examples/example1/ => /app/controller/root.php->index()
+http://<url>/examples/example1/bar => /app/controller/bar.php->index()
+http://<url>/examples/example1/bar/foo => /app/controller/bar.php->foo()
+
+Folders : 
+
+http://<url>/examples/example1/foo => /app/controller/foo/root.php->index()
+http://<url>/examples/example1/foo/foo => /app/controller/foo/root.php->foo()
+http://<url>/examples/example1/foo/bar => /app/controller/foo/bar.php->index()
+http://<url>/examples/example1/foo/bar/foo => /app/controller/foo/bar.php->foo()
+
+Parameters : 
+
+http://<url>/examples/example1/foobar/test => /app/controller/root.php->foobar( "test" );
+
+
+
+
+
