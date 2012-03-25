@@ -79,7 +79,7 @@ class rest_controller extends controller{
 				header('HTTP/1.1 401 Unauthorized', true, 200);
 				break;
 			case self::$CODE_404:
-				header('HTTP/1.0 404 Not Found', true, 404);
+				header('HTTP/1.1 404 Not Found', true, 404);
 				break;
 		}
 		
