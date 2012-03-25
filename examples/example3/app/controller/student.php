@@ -3,7 +3,6 @@ class student extends rest_controller{
 	
 	protected function get( $resource ){
 		$this->load_model( "student_model" );
-		$this->load_helper( "output_helper" );
 		if( $resource ){
 			$response = $this->student_model->get_student( $resource );
 		}else{
@@ -12,7 +11,7 @@ class student extends rest_controller{
 		if( !$response ){
 			$this->sendResponse( self::$CODE_404 );
 		}else{
-			$this->sendResponse( self::$CODE_200, $response );
+			$this->sendResponse( self::$CODE_200, $response, self::$RESPONSE_TYPE_JSON );
 		}
 	}
 	
@@ -30,7 +29,7 @@ class student extends rest_controller{
 		
 		if( $firstName && $secondName && $gender && $dob ){
 			$response = $this->student_model->add_student( array( $firstName, $secondName, $gender, $dob ) );
-			//TODO - Return the student
+			$this->sendResponse( self::$CODE_200, $response, self::$RESPONSE_TYPE_JSON );
 		}else{
 			$this->sendResponse( self::$CODE_400 );
 		}

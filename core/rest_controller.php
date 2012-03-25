@@ -1,6 +1,10 @@
 <?php
 class rest_controller extends controller{
 	
+	protected static $RESPONSE_TYPE_TEXT = "responseTypeText";
+	protected static $RESPONSE_TYPE_XML = "responseTypeXML";
+	protected static $RESPONSE_TYPE_JSON = "responseTypeJSON";
+	
 	protected static $CODE_200 = "200";
 	protected static $CODE_400 = "400";
 	protected static $CODE_401 = "401";
@@ -9,6 +13,10 @@ class rest_controller extends controller{
 	protected $resource;
 	protected $method;
 	protected $headers;
+	
+	public function __construct(){
+		$this->load_helper( "output_helper" );
+	}
 	
 	public function index( $resource = null ){
 		$this->resource = $resource;
@@ -56,11 +64,13 @@ class rest_controller extends controller{
 	protected function post(){
 	}
 	
-	protected function sendResponse( $code, $response = null ){
+	protected function sendResponse( $code, $response = null, $responseType = null ){
+		if( !$responseType ){
+			$responseType = self::$RESPONSE_TYPE_TEXT;
+		}
 		switch( $code ){
 			case self::$CODE_200:
 				header('HTTP/1.1 200 OK', true, 200);
-				json_output( $response );
 				break;
 			case self::$CODE_400:
 				header('HTTP/1.1 400 Bad Request', true, 200);
@@ -72,6 +82,19 @@ class rest_controller extends controller{
 				header('HTTP/1.0 404 Not Found', true, 404);
 				break;
 		}
-		exit();
+		
+		if( $response ){
+			switch( $responseType ){
+				case self::$RESPONSE_TYPE_JSON :
+					json_output( $response );
+					break;
+				case self::$RESPONSE_TYPE_XML :
+					xml_ouput( $response );
+					break;
+				default :
+					echo $response;
+					break;
+			}
+		}
 	}
 }
